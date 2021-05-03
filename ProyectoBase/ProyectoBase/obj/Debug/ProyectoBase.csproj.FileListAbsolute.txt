@@ -1,0 +1,13 @@
+P:\clase2\ProyectoBase\ProyectoBase\bin\Debug\ProyectoBase.exe.config
+P:\clase2\ProyectoBase\ProyectoBase\bin\Debug\ProyectoBase.exe
+P:\clase2\ProyectoBase\ProyectoBase\bin\Debug\ProyectoBase.pdb
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.csprojAssemblyReference.cache
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.LoginForm.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.Properties.Resources.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.csproj.GenerateResource.cache
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.csproj.CoreCompileInputs.cache
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.exe
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.pdb
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.PrincipalForm.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.AltaPersona.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Debug\ProyectoBase.Usuarios.resources
