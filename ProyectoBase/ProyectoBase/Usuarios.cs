@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoBase.AccesoADatos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,50 +36,18 @@ namespace ProyectoBase
 
         private void CargarGrilla()
         {
-
-
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
-            SqlConnection cn = new SqlConnection(cadenaConexion);
-
             try
             {
-                bool resultado = false;
-                SqlCommand cmd = new SqlCommand();
-                string consulta = "SELECT * FROM usuarios";
+                grillaUsuarios.DataSource = AD_Usuarios.ObtenerListadoUsuarios();
 
-                cmd.Parameters.Clear();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = consulta;
-
-                cn.Open();
-                cmd.Connection = cn;
-
-                DataTable tabla = new DataTable();
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(tabla);
-                grillaUsuarios.DataSource = tabla;
-                if (tabla.Rows.Count == 1)
-                {
-                    resultado = true;
-                }
-
-                else
-                {
-                    resultado = false;
-                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                throw;
+                MessageBox.Show("Error al obtener listado de usuarios.");
             }
-            finally
-            {
-                cn.Close();
-            }
-
         }
+
+       
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
@@ -103,7 +72,7 @@ namespace ProyectoBase
                 {
                     try
                     {
-                        bool resultado = InsertarUsuario(txtNombreDeUsuario.Text, txtPassword.Text);
+                        bool resultado = AD_Usuarios.InsertarUsuario(txtNombreDeUsuario.Text, txtPassword.Text);
                         if (resultado)
                         {
                             MessageBox.Show("Usuario dado de alta exitosamente!");
@@ -128,47 +97,7 @@ namespace ProyectoBase
                     MessageBox.Show("Los passwords no coinciden");
                 }
             }
-        }
-        private bool InsertarUsuario(string nombreDeUsuario, string password)
-        {
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
-            SqlConnection cn = new SqlConnection(cadenaConexion);
-            bool resultado = false;
-            
-            try
-            {
-                SqlCommand cmd = new SqlCommand();
-                string consulta = "INSERT INTO usuarios (NombreDeUsuario, Password) VALUES(@nombreUsu, @pass)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@nombreUsu", nombreDeUsuario);
-                cmd.Parameters.AddWithValue("@pass", password);
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = consulta;
-
-                cn.Open();
-                cmd.Connection = cn;
-                cmd.ExecuteNonQuery();
-                resultado = true;
-
-
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                cn.Close();
-            }
-            
-
-
-
-
-            return resultado;
-        }
+        }   
     
     }
    

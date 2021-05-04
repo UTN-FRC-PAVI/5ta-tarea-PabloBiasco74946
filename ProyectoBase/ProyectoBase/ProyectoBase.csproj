@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\AD_Personas.cs" />
+    <Compile Include="AccesoADatos\AD_Usuarios.cs" />
+    <Compile Include="AccesoADatos\AD_Varios.cs" />
     <Compile Include="AltaPersona.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,5 +134,6 @@
   <ItemGroup>
     <None Include="Resources\iconfinder_multimedia-43_2849793.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

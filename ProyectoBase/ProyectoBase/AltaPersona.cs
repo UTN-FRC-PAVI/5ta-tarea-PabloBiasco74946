@@ -1,4 +1,5 @@
-﻿using ProyectoBase.Entidades;
+﻿using ProyectoBase.AccesoADatos;
+using ProyectoBase.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,72 +39,26 @@ namespace ProyectoBase
 
         private void CargarGrilla()
         {
-
-
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
-            SqlConnection cn = new SqlConnection(cadenaConexion);
-
             try
             {
-                bool resultado = false;
-                SqlCommand cmd = new SqlCommand();
-                string consulta = "SELECT Nombre, Apellido, IdTipoDocumento, NumeroDocumento FROM personas";
+                GdrPersonas.DataSource = AD_Personas.ObtenerListadoPersonasReducido();
 
-                cmd.Parameters.Clear();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = consulta;
-
-                cn.Open();
-                cmd.Connection = cn;
-
-                DataTable tabla = new DataTable();
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(tabla);
-                GdrPersonas.DataSource = tabla;
-                if (tabla.Rows.Count == 1)
-                {
-                    resultado = true;
-                }
-
-                else
-                {
-                    resultado = false;
-                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw;
-            }
-            finally
-            {
-                cn.Close();
-            }
-
+                MessageBox.Show("Error al obtener personas.");            }
+                
         }
+
         private void CargarComboTiposDocumentos()
         {
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
-            SqlConnection cn = new SqlConnection(cadenaConexion);
+
             try
             {
-                bool resultado = false;
-                SqlCommand cmd = new SqlCommand();
-                string consulta = "SELECT * FROM tipo_documentos";
 
-                cmd.Parameters.Clear();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = consulta;
-
-                cn.Open();
-                cmd.Connection = cn;
-
-                DataTable tabla = new DataTable();
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(tabla);
-                cmbTipoDocumento.DataSource = tabla;
+                //cmbTipoDocumento.DataSource = AD_Varios.ObtenerTiposDocumentos();
+                cmbTipoDocumento.DataSource = AD_Varios.ObtenerTabla("tipo_documentos");
                 cmbTipoDocumento.DisplayMember = "Nombre";
                 cmbTipoDocumento.ValueMember = "Id";
                 cmbTipoDocumento.SelectedIndex = -1;
@@ -111,42 +66,16 @@ namespace ProyectoBase
             catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show("Error al cargar combo tipo documentos.");
+
             }
-            finally
-            {
-                cn.Close();
-            }
-
-
-
-
-
-
         }
 
         private void CargarComboCarreras()
         {
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
-            SqlConnection cn = new SqlConnection(cadenaConexion);
             try
             {
-                bool resultado = false;
-                SqlCommand cmd = new SqlCommand();
-                string consulta = "SELECT * FROM carreras";
-
-                cmd.Parameters.Clear();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = consulta;
-
-                cn.Open();
-                cmd.Connection = cn;
-
-                DataTable tabla = new DataTable();
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(tabla);
-                cmbCarrera.DataSource = tabla;
+                cmbCarrera.DataSource = AD_Varios.ObtenerCarreras();
                 cmbCarrera.DisplayMember = "Nombre";
                 cmbCarrera.ValueMember = "Id";
                 cmbCarrera.SelectedIndex = -1;
@@ -154,11 +83,7 @@ namespace ProyectoBase
             catch (Exception ex)
             {
 
-                throw;
-            }
-            finally
-            {
-                cn.Close();
+                MessageBox.Show("Error al cargar Combo Carreras.");
             }
 
         }
@@ -246,7 +171,7 @@ namespace ProyectoBase
 
 
             //MessageBox.Show("Datos de la persona: " + per.NombrePersona + per.ApellidoPersona + " " + per.DocumentoPersona);
-            bool resultado = AgregarPersonaADB(p);
+            bool resultado = AD_Varios.AgregarPersonaADB(p);
             if (resultado)
             {
                 MessageBox.Show("Persona agregada con éxito");
@@ -262,58 +187,7 @@ namespace ProyectoBase
 
         }
 
-        private bool AgregarPersonaADB(Persona per)
-        {
-
-
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
-            SqlConnection cn = new SqlConnection(cadenaConexion);
-            bool resultado = false;
-
-            try
-            {
-                SqlCommand cmd = new SqlCommand();
-                string consulta = "INSERT INTO personas (Nombre, Apellido, FechaNacimiento, IdSexo, IdTipoDocumento, NumeroDocumento, Calle, NroCasa, Soltero, Casado, Hijos, CantidadHijos, IdCarrera) VALUES(@Nombre, @Apellido, @FechaNacimiento, @IdSexo, @IdTipoDocumento, @NumeroDocumento, @Calle, @NroCasa, @Soltero, @Casado, @Hijos, @CantidadHijos, @IdCarrera)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@Nombre", per.NombrePersona);
-                cmd.Parameters.AddWithValue("@Apellido", per.ApellidoPersona);
-                cmd.Parameters.AddWithValue("@FechaNacimiento", per.FechaNacimientoPersona);
-                cmd.Parameters.AddWithValue("@IdSexo", per.SexoPersona);
-                cmd.Parameters.AddWithValue("@IdTipoDocumento", per.TipoDocumentoPersona);
-                cmd.Parameters.AddWithValue("@NumeroDocumento", per.DocumentoPersona);
-                cmd.Parameters.AddWithValue("@Calle", per.CallePersona);
-                cmd.Parameters.AddWithValue("@NroCasa", per.NroCasaPersona);
-                cmd.Parameters.AddWithValue("@Soltero", per.SolteroPersona);
-                cmd.Parameters.AddWithValue("@Casado", per.CasadoPersona);
-                cmd.Parameters.AddWithValue("@Hijos", per.HijosPersona);
-                cmd.Parameters.AddWithValue("@CantidadHijos", per.CantidadHijosPersona);
-                cmd.Parameters.AddWithValue("@IdCarrera", per.CarreraPersona);
-
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = consulta;
-
-                cn.Open();
-                cmd.Connection = cn;
-                cmd.ExecuteNonQuery();
-                resultado = true;
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                cn.Close();
-            }
-
-
-
-
-
-            return resultado;
-        }
+       
 
 
 

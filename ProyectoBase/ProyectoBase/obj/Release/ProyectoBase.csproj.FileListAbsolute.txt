@@ -1,0 +1,13 @@
+P:\clase2\ProyectoBase\ProyectoBase\bin\Release\ProyectoBase.exe.config
+P:\clase2\ProyectoBase\ProyectoBase\bin\Release\ProyectoBase.exe
+P:\clase2\ProyectoBase\ProyectoBase\bin\Release\ProyectoBase.pdb
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.csprojAssemblyReference.cache
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.AltaPersona.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.LoginForm.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.PrincipalForm.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.Properties.Resources.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.Usuarios.resources
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.csproj.GenerateResource.cache
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.csproj.CoreCompileInputs.cache
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.exe
+P:\clase2\ProyectoBase\ProyectoBase\obj\Release\ProyectoBase.pdb

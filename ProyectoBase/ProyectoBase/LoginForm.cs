@@ -1,4 +1,5 @@
-﻿using ProyectoBase.Entidades;
+﻿using ProyectoBase.AccesoADatos;
+using ProyectoBase.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,7 @@ namespace ProyectoBase
 
                 try
                 {
-                    resultado = ValidarUsuario(nombreDeUsuario, password);
+                    resultado = AD_Usuarios.ValidarUsuario(nombreDeUsuario, password);
                     if (resultado == true)
                     {
                         Usuario usu = new Usuario(nombreDeUsuario, password);
@@ -72,54 +73,54 @@ namespace ProyectoBase
 
         }
 
-        private bool ValidarUsuario(string nombreDeUsuario, string Password)
-        {
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
-            SqlConnection cn = new SqlConnection(cadenaConexion);
+        //private bool ValidarUsuario(string nombreDeUsuario, string Password)
+        //{
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
 
-            try
-            {
-                bool resultado = false;
-                SqlCommand cmd = new SqlCommand();
-                string consulta = "SELECT * FROM usuarios WHERE NombreDeUsuario like @nombreUsu AND Password like @pass";
+        //    try
+        //    {
+        //        bool resultado = false;
+        //        SqlCommand cmd = new SqlCommand();
+        //        string consulta = "SELECT * FROM usuarios WHERE NombreDeUsuario like @nombreUsu AND Password like @pass";
 
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@nombreUsu", nombreDeUsuario);
-                cmd.Parameters.AddWithValue("@pass", Password);
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = consulta;
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("@nombreUsu", nombreDeUsuario);
+        //        cmd.Parameters.AddWithValue("@pass", Password);
+        //        cmd.CommandType = CommandType.Text;
+        //        cmd.CommandText = consulta;
 
-                cn.Open();
-                cmd.Connection = cn;
+        //        cn.Open();
+        //        cmd.Connection = cn;
 
-                DataTable tabla = new DataTable();
+        //        DataTable tabla = new DataTable();
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(tabla);
+        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //        da.Fill(tabla);
 
-                if (tabla.Rows.Count == 1)
-                {
-                    resultado = true;
-                }
+        //        if (tabla.Rows.Count == 1)
+        //        {
+        //            resultado = true;
+        //        }
 
-                else
-                {
-                    resultado = false;
-                }
+        //        else
+        //        {
+        //            resultado = false;
+        //        }
 
-                return resultado;
-            }
-            catch (Exception ex)
-            {
+        //        return resultado;
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                throw;
-            }
-            finally
-            {
-                cn.Close();
-            }
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        cn.Close();
+        //    }
 
             
-        }
+        //}
     }
 }
